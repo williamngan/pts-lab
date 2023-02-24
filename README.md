@@ -1,2 +1,1 @@
-# pts-toybox
-A collection of fun and experimental stuff made with Pts.js
+# A collection of fun and experimental stuff made with Pts.js
