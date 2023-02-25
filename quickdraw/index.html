@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Quick Draw</title>
+    <style>
+      body { 
+        margin: 0;
+        font: 12px/1.5 sans-serif;
+      }
+      #container { 
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        overflow: scroll;
+      }
+      #pts { background-color: #f1f3f7; width: 800px; height: 800px;}
+      
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pts/0.11.3/pts.min.js" integrity="sha512-kIbTg9AJSxJy8BSWMU61bpXbVOmse7Iw7263LbdWchKpKYap0k2FQcipOu8ubgzJqKKS+I6JR23LZMrZwPCwQA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  </head>
+  <body>
+
+  <div id="container">
+    <div id="pts"></div>
+  </div>
+  
+	<script src="index.js"></script>
+  </body>
+</html>
