@@ -6,7 +6,6 @@ let data, drawings;
   const res = await fetch("./angel.json");
   data = await res.json();
   drawings = getDrawings(data, 5);
-  console.log( drawings[0] );
 })();
 
 function getDrawings(data, max=10) {
@@ -34,13 +33,16 @@ function* drawStrokeFn(g) {
 let drawID = 0;
 let lineIndex = 0;
 let prevPt;
+let pause = 0;
 
 function drawNext( id, prev ) {
   if (!drawings[id]) return; // all drawing done
-  if (lineIndex >= drawings[id].length) return "done"; // current drawing done
+  if (lineIndex >= drawings[id].length) {
+    pause = pause < 100 ? pause+1 : 0;
+    return pause === 0 ? "done" : prevPt; // current drawing done
+  }
 
   const genPt = drawings[id][lineIndex].next(); // iterate to next point function
-
   if (genPt && !genPt.done) {
     const next = genPt.value(space.size.x/1.5, space.size.$divide(6));
     if (prev) form.stroke("#000", 12, "round", "round").line( [prev, next] );
@@ -50,18 +52,25 @@ function drawNext( id, prev ) {
   }
 }
 
-Pts.quickStart("#pts", "#fff")(t => {
-  if (!drawings) return;
-  space.refresh(false);
-
-  prevPt = drawNext( drawID, prevPt );
-
-  if (prevPt === "done") { // reset and start next drawing
-    drawID++;
-    lineIndex = 0;
-    prevPt = null;
-    space.clear();
+const space = new CanvasSpace("#pts").setup({bgcolor: "#fff", });
+const form = space.getForm();
+space.add( {
+  animate: (time) => {
+    if (!drawings) return;
+    space.refresh(false);
+    
+    prevPt = drawNext( drawID, prevPt );
+    if (prevPt === "done") { // reset and start next drawing
+      drawID++;
+      lineIndex = 0;
+      prevPt = null;
+      space.clear();
+    }
+  }, 
+  action: (type, px, py) => {
+    if (type === "click") Util.download( space, "quickdraw" );
   }
 });
+space.bindMouse().bindTouch().play();
 
 
