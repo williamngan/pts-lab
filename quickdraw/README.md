@@ -2,10 +2,11 @@
 
 This is a script to render a series of drawings from the [QuickDraw dataset](https://github.com/googlecreativelab/quickdraw-dataset)
 
+![angel gif](https://user-images.githubusercontent.com/4358746/221458018-6f759c9b-c22c-4477-86ca-e6558db65610.gif)
+
 ### Online demo
 
 See [https://williamngan.github.io/pts-lab/quickdraw/](https://williamngan.github.io/pts-lab/quickdraw/)
-
 
 ### Add your own data
 
